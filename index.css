@@ -127,7 +127,7 @@ header a.icon {
 	min-width: 160px;
   position: absolute;
 	right: -5px;
-	top: 54px;
+	top: 53px;
   z-index: 999;
 }
 .dropdown-content a {
@@ -199,7 +199,7 @@ header a.icon {
 	display: inline-block;
 	font-family: var(--font-family);
 	height: 93vh;
-	padding-top: 7px;
+	padding-top: 5px;
 	width: 65%;
 	vertical-align: top;
 }
@@ -207,6 +207,7 @@ header a.icon {
 .chatbox {
 	height: 80%;
 	overflow: auto;
+	overflow: -moz-scrollbars-none;
 	padding: 0 7px 0 7px;
 }
 
