@@ -102,6 +102,7 @@ header a.icon {
 .headerWrap {
 	max-width: 940px;
 	margin: 0 auto;
+	position: relative;
 }
 
 .headerInfo {
@@ -124,10 +125,10 @@ header a.icon {
 	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 	display: none;
 	min-width: 160px;
-  	position: absolute;
-	right: 0;
-	top: 56px;
-  	z-index: 999;
+  position: absolute;
+	right: -5px;
+	top: 54px;
+  z-index: 999;
 }
 .dropdown-content a {
 	color: var(--background-color);
