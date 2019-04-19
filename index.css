@@ -99,6 +99,11 @@ header a.icon {
   top: 0;
 }
 
+.headerWrap {
+	max-width: 940px;
+	margin: 0 auto;
+}
+
 .headerInfo {
 	display: inline-block;
 	width: 94%;

@@ -182,6 +182,7 @@ function Layout() {
     return {
         view: (vnode) => [
             m("header", [
+                m(".headerWrap", [
                 m(".headerInfo", m("h1", "D.chat"), m('h2', m.route.param('conversation'))),
                 m(".hambSpace", [
                     m(".hamburger#hamburger", {
@@ -207,6 +208,7 @@ function Layout() {
                         m("a[href=#faq]", "FAQs"),
                     ])
                 ]),
+              ])
             ]),m("main", [
             m("section.sidePane", [
                 // m("h2", "Your conversations"),
