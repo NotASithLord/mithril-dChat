@@ -205,7 +205,7 @@ header a.icon {
 
 .chatbox {
 	height: 80%;
-	overflow: scroll;
+	overflow: auto;
 	padding: 0 7px 0 7px;
 }
 
