@@ -1,0 +1,385 @@
+/* style the navbar spacing between messages, add scroll to previous chats
+
+ */
+
+html {
+	margin: 0;
+	padding: 0;
+}
+
+:root {
+	--primary-color: #0089cc;
+	--background-color: #15202b;
+	--primary-font-color: white;
+	--font-family: sans-serif;
+	--font-family: sans-serif;
+}
+
+body {
+	background-color: #10171e;
+	height:100vh;
+	margin: 0;
+	overflow: hidden;
+	padding: 0;
+}
+
+header {
+	max-width: 950px;
+	margin: 0 auto;
+	border-bottom: 1px solid #38444d;
+}
+
+main {
+	max-width: 950px;
+	margin: 0 auto;
+}
+
+h1 {
+	color: var(--primary-font-color);
+  font-family: var(--font-family);
+	font-size: 27px;
+  margin: 15px;
+	max-width: 100px;
+}
+
+h2 {
+	color: var(--primary-font-color);
+	font-size: 22px;
+  text-align: center;
+}
+
+h3 {
+	color: var(--primary-font-color);
+	font-size: 1em;
+	text-align: center;
+}
+
+.welcomeMsg {
+	padding-bottom: 108px;
+	padding-top: 140px;
+}
+
+img {
+	border-radius: 15px;
+	float:left;
+	height: auto;
+	margin: 5px 5px 5px 5px;
+	max-width: 40px;
+}
+
+input {
+	background-color: var(--background-color);
+	border: 2px solid #38444d;
+	border-radius: 10px;
+	color: var(--primary-font-color);
+	margin-right: 5px;
+	min-height: 22px;
+}
+
+p {
+	display: inline;
+	margin-left: 10px;
+  margin-right: auto;
+  margin-top: 10px;
+  position: relative;
+}
+
+header {
+	background-color: var(--primary-color);
+	font-family: var(--font-family);
+	height: 7vh;
+	position: relative;
+}
+
+header a:hover {
+  background-color: var(--background-color);
+  color: var(--background-color);
+}
+
+header a.icon {
+  display: block;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.headerInfo {
+	display: inline-block;
+	width: 94%;
+}
+
+.headerInfo h1, .headerInfo h2 {
+	display: inline-block;
+	margin-bottom: 0;
+}
+
+.headerInfo h2 {
+	margin-left: 25%;
+}
+
+.dropdown-content {
+	background-color: var(--background-color);
+	border: 1px solid #38444d;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	display: none;
+	min-width: 160px;
+  	position: absolute;
+	right: 0;
+	top: 56px;
+  	z-index: 999;
+}
+.dropdown-content a {
+	color: var(--background-color);
+	padding: 12px 16px;
+	text-decoration: none;
+	display: block;
+}
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+.dropdown-content a {
+	color: var(--primary-font-color);
+	font-weight: bold;
+}
+
+.hamburger {
+    cursor: pointer;
+    display: inline-block;
+		height: 32px;
+    padding: 0 5px 0 5px;
+		position: relative;
+		margin-bottom: -7px;
+    width: 32px;
+		-webkit-transform: rotate(0deg);
+		-moz-transform: rotate(0deg);
+		-o-transform: rotate(0deg);
+		transform: rotate(0deg);
+		-webkit-transition: .25s ease-in-out;
+		-moz-transition: .25s ease-in-out;
+		-o-transition: .5s ease-in-out;
+		transition: .25s ease-in-out;
+}
+
+.hambSpace {
+	display: inline-block;
+}
+
+.bar {
+  	height: 3px;
+		width: 100%;
+  	background-color: white;
+  	border-radius: 5%;
+		opacity: 1;
+		position: absolute;
+		-webkit-transform: rotate(0deg);
+		-moz-transform: rotate(0deg);
+		-o-transform: rotate(0deg);
+		transform: rotate(0deg);
+		-webkit-transition: .25s ease-in-out;
+		-moz-transition: .25s ease-in-out;
+		-o-transition: .25s ease-in-out;
+		transition: .25s ease-in-out;
+}
+
+.searchInput {
+	margin: 5px;
+	width: 95%;
+	height: 32px;
+}
+
+#searchSubmit {
+	border-radius: 10px;
+	height: 32px;
+}
+
+.outerChat {
+	background-color: var(--background-color);
+	display: inline-block;
+	font-family: var(--font-family);
+	height: 93vh;
+	width: 65%;
+	vertical-align: top;
+}
+
+.chatbox {
+	height: 80%;
+	overflow: scroll;
+	padding: 0 7px 0 7px;
+}
+
+.chatbox p {
+	display: inline;
+}
+
+.msgHeader {
+	width: 95%;
+}
+
+.msgHeader p {
+	font-size: 0.8em;
+  margin-top: 10px;
+	text-align: left;
+}
+
+.msgHeader .time {
+	margin-left: 56%;
+}
+
+#chatsPane {
+	height:90%;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
+#chatsPane h3 {
+	text-align: left;
+}
+
+#chatsPane p {
+	display:inline-block;
+	text-align: left;
+}
+
+#chatsPane span {
+	text-align: right;
+}
+
+.previewWrap {
+	width: 70%;
+}
+
+.unread {
+  position: relative;
+  left: 7em;
+	width: 30%;
+}
+
+.sidePane {
+	background-color: var(--background-color);
+	/*border-right: 2px solid #38444d;*/
+	color: var(--primary-font-color);
+	display: inline-block;
+	font-family: var(--font-family);
+	height: 93vh;
+	vertical-align: top;
+	width: 35%;
+	z-index: 1;
+}
+.previousSenders a {
+	color: white;
+	text-decoration: none;
+}
+.previouSenders p {
+	max-width: 50px;
+}
+
+.previousSenders img {
+  max-width: 40px;
+  height: auto;
+}
+
+.msgWrapper {
+	clear: both;
+	margin: auto;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	max-width: 600px;
+	min-height: 52px;
+}
+
+.convoWrapper {
+	border: 2px solid #38444d;
+	border-radius: 15px;
+	margin: 5px;
+	clear: both;
+}
+
+.msg {
+	background-color: #3d5466;
+	border-radius: 20px;
+	color: var(--primary-font-color);
+	max-width: 400px;
+	min-height: 50px;
+	width: 40vw;
+}
+
+.msgContent {
+	margin-top: 10px;
+}
+
+.you {
+	background-color: #0089cc;
+	float: right;
+}
+
+.myMsg {
+	min-height: 52px;
+	height:auto;
+	margin: 0 auto;
+	max-width: 600px;
+}
+
+.homeMsgArea { /*position the textarea so that it is fixed*/
+	background-color: var(--background-color);
+	border-radius: 15px;
+	color: var(--primary-font-color);
+	font-size: 1em;
+	height: 64px;
+	margin: 0;
+	margin-top: 5px;
+	outline: none;
+	padding: 7px;
+    resize: none;
+    width: 70%;
+}
+
+.homeMsgArea::-webkit-input-placeholder {
+	color: var(--primary-font-color);
+	text-align: center;
+	padding-top: 20px;
+}
+
+.homeAccImg {
+	float: left;
+	max-width: 125px;
+	width: 20%;
+}
+
+.hamburger div:nth-child(1) {
+  top: 2px;
+}
+
+.hamburger div:nth-child(2), .hamburger div:nth-child(3) {
+  top: 14px;
+}
+
+.hamburger div:nth-child(4) {
+  top: 26px;
+	/*left: 0%;*/
+}
+
+.hamburger.open div:nth-child(1) {
+  top: 18px;
+  width: 0%;
+  left: 35%;
+}
+
+.hamburger.open div:nth-child(2) {
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.hamburger.open div:nth-child(3) {
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+
+.hamburger.open div:nth-child(4) {
+  top: 18px;
+  width: 0%;
+  left: 35%;
+}
