@@ -199,6 +199,7 @@ header a.icon {
 	display: inline-block;
 	font-family: var(--font-family);
 	height: 93vh;
+	padding-top: 7px;
 	width: 65%;
 	vertical-align: top;
 }
@@ -210,7 +211,7 @@ header a.icon {
 }
 
 .chatbox p {
-	display: inline;
+
 }
 
 .msgHeader {
@@ -283,8 +284,8 @@ header a.icon {
 .msgWrapper {
 	clear: both;
 	margin: auto;
-	margin-top: 5px;
-	margin-bottom: 5px;
+	/*margin-top: 5px;
+	margin-bottom: 5px;*/
 	max-width: 600px;
 	min-height: 52px;
 }
@@ -300,8 +301,9 @@ header a.icon {
 	background-color: #3d5466;
 	border-radius: 20px;
 	color: var(--primary-font-color);
+	margin-bottom: 5px;
 	max-width: 400px;
-	min-height: 50px;
+	min-height: 52px;
 	width: 40vw;
 }
 
