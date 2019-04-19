@@ -23,17 +23,6 @@ body {
 	padding: 0;
 }
 
-header {
-	max-width: 950px;
-	margin: 0 auto;
-	border-bottom: 1px solid #38444d;
-}
-
-main {
-	max-width: 950px;
-	margin: 0 auto;
-}
-
 h1 {
 	color: var(--primary-font-color);
   font-family: var(--font-family);
@@ -84,10 +73,17 @@ p {
   position: relative;
 }
 
+main {
+	max-width: 950px;
+	margin: 0 auto;
+}
+
 header {
 	background-color: var(--primary-color);
+	border-bottom: 1px solid #38444d;
 	font-family: var(--font-family);
-	height: 7vh;
+	margin: 0 auto;
+	height: 53px;
 	position: relative;
 }
 
