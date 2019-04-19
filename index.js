@@ -111,7 +111,7 @@ function MessageComposer() {
                 }),
                 m(".sendButton", [
                     m("input[type=submit]#submit", {
-                        value: "Submit"
+                        value: "Send"
                     }),
                 ]),
             ]);

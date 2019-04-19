@@ -306,7 +306,9 @@ header a.icon {
 }
 
 .msgContent {
+	margin: 0 auto;
 	margin-top: 10px;
+	max-width: 91%;
 }
 
 .you {
