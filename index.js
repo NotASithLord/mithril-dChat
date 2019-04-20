@@ -60,7 +60,7 @@ function searchInput(searchTerm, array) {
 
 const HomeScreen = {
     view: () => {
-        return m('h3.welcomeMsg', "Please select a conversation to get started");
+        return m('h3.welcomeMsg',"Please select a conversation to get started");
     }
 }
 
