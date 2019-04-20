@@ -12,10 +12,10 @@ const incomingMessages = [
     {content: "Whassupbhv dude", sender: "Kelly", img: "assets/random3.jpeg"},
     {content: "chill buyvitvf dudet", sender: "John", img: "assets/random2.jpeg"},
     {content: "das great", sender: "Kelly", img: "assets/random3.jpeg"},
-    {content: "wasabi bvjfti", sender: "Jacktheknife", img: "assets/random4.jpeg"},
+    {content: "wasabi bvjfti", sender: "Sherwino", img: "assets/random4.jpeg"},
     {content: "chill dudet", sender: "John", img: "assets/random2.jpeg"},
     {content: "das great", sender: "Kelly", img: "assets/random3.jpeg"},
-    {content: "wasabi", sender: "Jacktheknife", img: "assets/random4.jpeg"},
+    {content: "wasabi", sender: "Sherwino", img: "assets/random4.jpeg"},
     {content: "Hey, what's up", sender: "Alberto", img: "assets/random5.jpeg"},
     {content: "Hey there", sender: "John", img: "assets/random3.jpeg"},
     {content: "Hey there", sender: "John", img: "assets/random3.jpeg"},
@@ -24,10 +24,10 @@ const incomingMessages = [
     {content: "Whassup dude", sender: "Kelly", img: "assets/random3.jpeg"},
     {content: "chill dudet", sender: "John", img: "assets/random3.jpeg"},
     {content: "das great", sender: "Kelly", img: "assets/random3.jpeg"},
-    {content: "wasabi", sender: "Jacktheknife", img: "assets/random4.jpeg"},
+    {content: "wasabi", sender: "Sherwino", img: "assets/random4.jpeg"},
     {content: "chill dudet", sender: "John", img: "assets/random3.jpeg"},
     {content: "das great", sender: "Kelly", img: "assets/random3.jpeg"},
-    {content: "wasabi", sender: "Jacktheknife", img: "assets/random4.jpeg"}
+    {content: "wasabi", sender: "Sherwino", img: "assets/random4.jpeg"}
 ]
 
 const subs = [];

@@ -18,7 +18,7 @@ function sendMessage(userInput) {
             content: userInput,
             time: getTime(),
             read: true,
-            img: "assets/ferrari.jpg"
+            img: "assets/vader.jpg"
         })
     }
     return false;
@@ -99,7 +99,7 @@ function MessageComposer() {
                 }
             }, [
                 m(".accImgWrap", m("img.homeAccImg", {
-                    src: "assets/random.jpeg",
+                    src: "assets/vader.jpg",
                 })),
                 m("input[autofocus].homeMsgArea", {
                     placeholder: "Your message here ...",
