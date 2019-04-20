@@ -76,6 +76,7 @@ p {
 main {
 	max-width: 950px;
 	margin: 0 auto;
+	margin-top: 10px;
 }
 
 header {
