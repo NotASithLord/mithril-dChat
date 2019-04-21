@@ -135,14 +135,14 @@ const ChatPane = {
             convo.messageQueue.forEach((msg) => {
                 if (msg.read === false) unread++;
             })
-            return m('div.convoWrapper', [
+            return m('a', {
+              href: `/${convo.sender}`,
+              oncreate: m.route.link
+            }, [
+              m('div.convoWrapper', [
                 m('div.previousSenders', {
                     onclick() {}
                 }, [
-                    m('a', {
-                        href: `/${convo.sender}`,
-                        oncreate: m.route.link
-                    }, [
                         m('img', {
                             src: convo.img
                         }),
@@ -151,9 +151,9 @@ const ChatPane = {
                             m('p', preview.content)
                         ]),
                         m('span.unread', unread)
-                    ])
                 ])
             ])
+          ])
         })
     }
 }

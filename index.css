@@ -9,14 +9,16 @@ html {
 
 :root {
 	--primary-color: #0089cc;
-	--background-color: #15202b;
+	--secondary-color: #38444d;
+	--prime-background-color: #10171e;
+	--sec-background-color: #15202b;
 	--primary-font-color: white;
 	--font-family: sans-serif;
 	--font-family: sans-serif;
 }
 
 body {
-	background-color: #10171e;
+	background-color: var(--prime-background-color);
 	height:100vh;
 	margin: 0;
 	overflow: hidden;
@@ -56,9 +58,9 @@ img {
 	max-width: 40px;
 }
 
-input, textarea {
-	background-color: var(--background-color);
-	border: 2px solid #38444d;
+input {
+	background-color: var(--prime-background-color);
+	border: 2px solid var(--secondary-color);
 	border-radius: 10px;
 	color: var(--primary-font-color);
 	margin-right: 5px;
@@ -81,7 +83,7 @@ main {
 
 header {
 	background-color: var(--primary-color);
-	border-bottom: 1px solid #38444d;
+	border-bottom: 1px solid var(--secondary-color);
 	font-family: var(--font-family);
 	margin: 0 auto;
 	height: 53px;
@@ -89,8 +91,8 @@ header {
 }
 
 header a:hover {
-  background-color: var(--background-color);
-  color: var(--background-color);
+  background-color: var(--sec-background-color);
+  color: var(--sec-background-color);
 }
 
 header a.icon {
@@ -121,8 +123,8 @@ header a.icon {
 }
 
 .dropdown-content {
-	background-color: var(--background-color);
-	border: 1px solid #38444d;
+	background-color: var(--sec-background-color);
+	border: 1px solid var(--secondary-color);
 	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 	display: none;
 	min-width: 160px;
@@ -132,7 +134,7 @@ header a.icon {
   z-index: 999;
 }
 .dropdown-content a {
-	color: var(--background-color);
+	color: var(--sec-background-color);
 	padding: 12px 16px;
 	text-decoration: none;
 	display: block;
@@ -196,7 +198,7 @@ header a.icon {
 }
 
 .outerChat {
-	background-color: var(--background-color);
+	background-color: var(--sec-background-color);
 	display: inline-block;
 	font-family: var(--font-family);
 	height: 93vh;
@@ -260,8 +262,8 @@ header a.icon {
 }
 
 .sidePane {
-	background-color: var(--background-color);
-	/*border-right: 2px solid #38444d;*/
+	background-color: var(--sec-background-color);
+	/*border-right: 2px solid var(--secondary-color);*/
 	color: var(--primary-font-color);
 	display: inline-block;
 	font-family: var(--font-family);
@@ -270,8 +272,7 @@ header a.icon {
 	width: 35%;
 	z-index: 1;
 }
-.previousSenders a {
-	color: white;
+.chatsPane a {
 	text-decoration: none;
 }
 .previouSenders p {
@@ -293,14 +294,15 @@ header a.icon {
 }
 
 .convoWrapper {
-	border: 2px solid #38444d;
+	border: 2px solid var(--secondary-color);
 	border-radius: 15px;
-	margin: 5px;
 	clear: both;
+	color: white;
+	margin: 5px;
 }
 
 .msg {
-	background-color: #3d5466;
+	background-color: var(--secondary-color);
 	border-radius: 20px;
 	color: var(--primary-font-color);
 	margin-bottom: 5px;
@@ -327,8 +329,8 @@ header a.icon {
 	max-width: 600px;
 }
 
-.homeMsgArea { /*position the textarea so that it is fixed*/
-	background-color: var(--background-color);
+.homeMsgArea {
+	background-color: var(--prime-background-color);
 	border-radius: 15px;
 	color: var(--primary-font-color);
 	font-size: 1em;
@@ -337,8 +339,8 @@ header a.icon {
 	margin-top: 5px;
 	outline: none;
 	padding: 7px;
-    resize: none;
-    width: 70%;
+  resize: none;
+  width: 70%;
 }
 
 .homeMsgArea::-webkit-input-placeholder {
