@@ -14,7 +14,6 @@ html {
 	--sec-background-color: #15202b;
 	--primary-font-color: white;
 	--font-family: sans-serif;
-	--font-family: sans-serif;
 }
 
 body {
@@ -318,7 +317,7 @@ header a.icon {
 }
 
 .you {
-	background-color: #0089cc;
+	background-color: var(--primary-color);
 	float: right;
 }
 

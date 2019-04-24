@@ -50,7 +50,7 @@ setInterval(() => {
       );
         // console.log(subs);
     }
-}, 3000);
+}, 100);
 
 window.connect = func => { subs.push(func) }
 })()

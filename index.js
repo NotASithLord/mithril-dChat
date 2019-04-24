@@ -1,7 +1,5 @@
 (() => {
-
 "use strict";
-
 document.title = "D.chat";
 
 const conversations = [];
@@ -12,6 +10,7 @@ function getTime() {
 }
 
 function sendMessage(userInput) {
+  console.log("current convo", currentConvo());
     if (userInput) {
         currentConvo().messageQueue.push({
             sender: "you",
@@ -19,13 +18,22 @@ function sendMessage(userInput) {
             time: getTime(),
             read: true,
             img: "assets/vader.jpg"
-        })
+        });
     }
-    return false;
+    //why?
+    return true;
 }
 
 function currentConvo() {
-    return conversations.find(convo => {
+  console.log("convo bug", conversations, conversations[0]);
+  console.log("convo param", m.route.param('conversation'));
+  console.log(
+    conversations.find((convo) => {
+        return convo.sender === m.route.param('conversation');
+    })
+  )
+    return conversations.find((convo) => {
+      // console.log(convo, convo.sender === m.route.param('conversation'));
         return convo.sender === m.route.param('conversation');
     });
 }
@@ -67,8 +75,9 @@ const HomeScreen = {
 const Chatbox = {
     view: () => {
         const convo = currentConvo();
+        console.log(convo);
         convo.messageQueue.forEach(msg => msg.read = true);
-        return convo.messageQueue.map(msg => {
+        return convo.messageQueue.map((msg) => {
             return m('.msgWrapper', m('.msg', {
                 class: msg.sender
             }, [
@@ -92,10 +101,12 @@ function MessageComposer() {
     return {
         view: () => {
             return m("form.myMsg", {
-                onsubmit() {
-                    console.log("submit", userInput);
-                    sendMessage(userInput);
-                    userInput = "";
+                onsubmit(e) {
+                  e.preventDefault();
+                  console.log("submit", userInput);
+                  console.log("teeest");
+                  sendMessage(userInput);
+                  userInput = "";
                 }
             }, [
                 m(".accImgWrap", m("img.homeAccImg", {
@@ -105,7 +116,7 @@ function MessageComposer() {
                     placeholder: "Your message here ...",
                     value: userInput,
                     oninput: (ev) => {
-                        console.log(ev.target.value);
+                        // console.log(ev.target.value);
                         userInput = ev.target.value
                     },
                 }),
@@ -230,7 +241,7 @@ function Layout() {
             m("section.outerChat", [
                 m(".chatbox", {
                     onupdate({dom}) {
-                      console.log("chatbox change firing");
+                      // console.log("chatbox change firing");
                         dom.scrollTop = dom.scrollHeight;
                     }
                 }, vnode.attrs.messages, vnode.attrs.homeMsg),
