@@ -29,12 +29,12 @@ function currentConvo() {
   console.log("convo param", m.route.param('conversation'));
   console.log(
     conversations.find((convo) => {
-        return convo.sender === m.route.param('conversation');
+        return convo.convoName === m.route.param('conversation');
     })
   )
     return conversations.find((convo) => {
       // console.log(convo, convo.sender === m.route.param('conversation'));
-        return convo.sender === m.route.param('conversation');
+        return convo.convoName === m.route.param('conversation');
     });
 }
 
@@ -47,7 +47,7 @@ function searchInput(searchTerm, array) {
         conversations.forEach((convo) => {
             let match = false;
             // console.log(convo.sender.toLowerCase(), reg.test(convo.sender.toLowerCase()))
-            if (reg.test(convo.sender.toLowerCase())) {
+            if (reg.test(convo.convoName.toLowerCase())) {
                 match = true;
             }
             convo.messageQueue.forEach((msg) => {
@@ -147,17 +147,17 @@ const ChatPane = {
                 if (msg.read === false) unread++;
             })
             return m('a', {
-              href: `/${convo.sender}`,
+              href: `/${convo.convoName}`,
               oncreate: m.route.link
             }, [
               m('div.convoWrapper', [
-                m('div.previousSenders', {
+                m('div.conversation', {
                     onclick() {}
                 }, [
                         m('img', {
                             src: convo.img
                         }),
-                        m('h3', convo.sender),
+                        m('h3', convo.convoName),
                         m('span.previewWrap', [
                             m('p', preview.content)
                         ]),
@@ -176,12 +176,12 @@ function Layout() {
     //This takes the subscription data from window.connect in backend.js, and does the logic to push the formatted incomingMessages into the conversations array
     connect(messageData => {
         // console.log("connect is running");
-        const convo = conversations.find(convo => convo.sender === messageData.sender);
+        const convo = conversations.find(convo => convo.convoName === messageData.sender);
         if (convo != null) {
             convo.messageQueue.push(messageData);
         } else {
             conversations.push({
-                sender: messageData.sender,
+                convoName: messageData.sender,
                 img: messageData.img,
                 messageQueue: [messageData],
                 read: messageData.read

@@ -274,11 +274,8 @@ header a.icon {
 .chatsPane a {
 	text-decoration: none;
 }
-.previouSenders p {
-	max-width: 50px;
-}
 
-.previousSenders img {
+.conversation img {
   max-width: 40px;
   height: auto;
 }
