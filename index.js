@@ -15,8 +15,8 @@ window.onload = () => {
         },
         "/:conversation": {
             render: () => m(Layout, {
-                messages: Chatbox,
-                composer: m(MessageComposer)
+                Chatbox: Chatbox,
+                MessageComposer: MessageComposer
             })
         },
     })
@@ -26,8 +26,6 @@ function Layout() {
     const conversations = [];
     let searchResults = [];
     let showHamburger = false;
-
-
 
     //This takes the subscription data from window.connect in backend.js, and does the logic to push the formatted incomingMessages into the conversations array
     connect(messageData => {
@@ -100,8 +98,8 @@ function Layout() {
                       // console.log("chatbox change firing");
                         dom.scrollTop = dom.scrollHeight;
                     }
-                },  vnode.attrs.messages ? m(vnode.attrs.messages,{conversations: conversations}) : vnode.attrs.messages , vnode.attrs.homeMsg),
-                vnode.attrs.composer
+                }, vnode.attrs.Chatbox ? m(vnode.attrs.Chatbox,{conversations: conversations}) : vnode.attrs.homeMsg),
+                vnode.attrs.MessageComposer ?  m(vnode.attrs.MessageComposer, {conversations: conversations}) : undefined
             ])
             ])
         ],
@@ -140,11 +138,11 @@ const Chatbox = {
 function MessageComposer() {
     let userInput = "";
     return {
-        view: () => {
+        view: (vnode) => {
             return m("form.messageComposer", {
                 onsubmit(event) {
                   event.preventDefault();
-                  sendMessage(userInput);
+                  sendMessage(userInput, currentConvo(vnode.attrs.conversations));
                   userInput = "";
                 }
             }, [
@@ -210,11 +208,12 @@ function getTime() {
     return date.getHours() + ":" + date.getMinutes();
 }
 
-function sendMessage(userInput) {
-  console.log("current convo", currentConvo());
+function sendMessage(userInput, convo) {
+  console.log("sending message to", convo);
     if (userInput) {
         try {
-            currentConvo().messageQueue.push({
+          
+            convo.messageQueue.push({
             sender: "you",
             content: userInput,
             time: getTime(),
