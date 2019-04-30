@@ -24,10 +24,9 @@
 
   function Layout() {
     const conversations = [];
-    let searchResults = [];
     let showHamburger = false;
 
-    //This takes the subscription data from window.connect in backend.js, and does the logic to push the formatted incomingMessages into the conversations array
+    //This takes the subscription data from window.connect in backend.js, and pushes the formatted incomingMessages into the conversations array
     connect(messageData => {
       // console.log("connect is running");
       const convo = conversations.find(convo => convo.convoName === messageData.sender);
@@ -74,32 +73,20 @@
             ]),
           ])
         ]), m("main", [
-          m("section.sidePane", [
-            // m("h2", "Your conversations"),
-            m("form.searchBar", {
-              oninput() {
-                searchResults = searchInput(document.getElementById("searchInput").value, conversations);
-              }
-            }, [
-              m("input.searchInput", {
-                "autocomplete": "off",
-                "id": "searchInput",
-                "placeholder": " Search"
-              }),
-            ]),
-            m("div#chatsPane", m(ChatPane, {
-              searchResults: searchResults,
-              conversations: conversations
-            }))
-          ]),
+          m(ChatPane, {
+            conversations: conversations
+          }),
           m("section.outerChat", [
             m(".chatbox", {
               onupdate({dom}) {
-                // console.log("chatbox change firing");
                 dom.scrollTop = dom.scrollHeight;
               }
-            }, vnode.attrs.Chatbox ? m(vnode.attrs.Chatbox, {conversations: conversations}) : vnode.attrs.homeMsg),
-            vnode.attrs.MessageComposer ? m(vnode.attrs.MessageComposer, {conversations: conversations}) : undefined
+            }, vnode.attrs.Chatbox ? m(vnode.attrs.Chatbox, {
+              conversations: conversations
+            }) : vnode.attrs.homeMsg),
+            vnode.attrs.MessageComposer ? m(vnode.attrs.MessageComposer, {
+              conversations: conversations
+            }) : undefined
           ])
         ])
       ],
@@ -179,40 +166,57 @@
     }
   }
 
-  const ChatPane = {
-    view: (vnode) => {
-      let paneContent = [];
-      if (vnode.attrs.searchResults.length) {
-        paneContent = vnode.attrs.searchResults;
-        // console.log("first", array);
-      } else {
-        paneContent = vnode.attrs.conversations
-        // console.log("hi", array);
-      }
-      return paneContent.map((convo) => {
-        const preview = convo.messageQueue[convo.messageQueue.length - 1];
-        let unread = 0;
-        convo.messageQueue.forEach((msg) => {
-          if (msg.read === false) unread++;
-        })
-        return m('a', {
-          href: `/${convo.convoName}`,
-          oncreate: m.route.link
-        }, [
-          m('div.convoWrapper', [
-            m('div.conversation', [
-              m('img', {
-                src: convo.img
-              }),
-              m('h3', convo.convoName),
-              m('span.previewWrap', [
-                m('p', preview.content)
-              ]),
-              m('span.unread', unread)
-            ])
-          ])
+  function ChatPane() {
+    let searchResults = [];
+    return {
+      view: (vnode) => {
+        let paneContent = [];
+        if (searchResults.length) {
+          paneContent = searchResults;
+        } else {
+          paneContent = vnode.attrs.conversations
+        }
+
+        return m("section.sidePane", [
+          m("form.searchBar", {
+            oninput() {
+              searchResults = searchInput(document.getElementById("searchInput").value, vnode.attrs.conversations);
+            }
+          }, [
+            m("input.searchInput", {
+              "autocomplete": "off",
+              "id": "searchInput",
+              "placeholder": " Search"
+            }),
+          ]),
+          m("div#chatsPane",
+            paneContent.map((convo) => {
+              const preview = convo.messageQueue[convo.messageQueue.length - 1];
+              let unread = 0;
+              convo.messageQueue.forEach((msg) => {
+                if (msg.read === false) unread++;
+              })
+              return m('a', {
+                href: `/${convo.convoName}`,
+                oncreate: m.route.link
+              }, [
+                m('div.convoWrapper', [
+                  m('div.conversation', [
+                    m('img', {
+                      src: convo.img
+                    }),
+                    m('h3', convo.convoName),
+                    m('span.previewWrap', [
+                      m('p', preview.content)
+                    ]),
+                    m('span.unread', unread)
+                  ])
+                ])
+              ])
+            })
+          )
         ])
-      })
+      }
     }
   }
 
@@ -268,6 +272,5 @@
     }
     return searchResults;
   }
-
 
 })();
