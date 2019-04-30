@@ -12,16 +12,19 @@ function getTime() {
 function sendMessage(userInput) {
   console.log("current convo", currentConvo());
     if (userInput) {
-        currentConvo().messageQueue.push({
+        try {
+            currentConvo().messageQueue.push({
             sender: "you",
             content: userInput,
             time: getTime(),
             read: true,
             img: "assets/vader.jpg"
-        });
+          });
+        }
+        catch(error) {
+          console.error(error);
+        }
     }
-    //why?
-    return true;
 }
 
 function currentConvo() {
@@ -120,15 +123,15 @@ function MessageComposer() {
 
 const ChatPane = {
     view: (vnode) => {
-        let array = [];
+        let paneContent = [];
         if (vnode.attrs.searchResults.length) {
-            array = vnode.attrs.searchResults;
+            paneContent = vnode.attrs.searchResults;
             // console.log("first", array);
         } else {
-            array = conversations;
+            paneContent = conversations
             // console.log("hi", array);
         }
-        return array.map((convo) => {
+        return paneContent.map((convo) => {
             const preview = convo.messageQueue[convo.messageQueue.length - 1];
             let unread = 0;
             convo.messageQueue.forEach((msg) => {
@@ -140,6 +143,7 @@ const ChatPane = {
             }, [
               m('div.convoWrapper', [
                 m('div.conversation', {
+                  //Solves unread # refresh, feels hacky
                     onclick() {
                       m.redraw();
                     }
