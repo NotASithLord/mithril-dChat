@@ -2,11 +2,8 @@
   "use strict";
   document.title = "D.chat";
 
-
-  //NOTE:Not as fast as jquery onload, since it waits for external assets not just DOM. Find suitable vanilla replacement
   //Only include UI interactivity within here, all other logic can start loading before DOM is ready
-  window.onload = () => {
-    // console.log(document.body);
+  window.addEventListener('DOMContentLoaded', () => {
     m.route(document.body, "/", {
       "/": {
         render: () => m(Layout, {
@@ -18,9 +15,9 @@
           Chatbox: Chatbox,
           MessageComposer: MessageComposer
         })
-      },
+      }
     })
-  }
+  });
 
   function Layout() {
     const conversations = [];
@@ -28,7 +25,6 @@
 
     //This takes the subscription data from window.connect in backend.js, and pushes the formatted incomingMessages into the conversations array
     connect(messageData => {
-      // console.log("connect is running");
       const convo = conversations.find(convo => convo.convoName === messageData.sender);
       if (convo != null) {
         convo.messageQueue.push(messageData);
@@ -99,6 +95,60 @@
     }
   }
 
+  function ChatPane() {
+    let searchResults = [];
+    return {
+      view: (vnode) => {
+        let paneContent = [];
+        if (searchResults.length) {
+          paneContent = searchResults;
+        } else {
+          paneContent = vnode.attrs.conversations
+        }
+
+        return m("section.sidePane", [
+          m("form.searchBar", {
+            oninput() {
+              searchResults = searchInput(document.getElementById("searchInput").value, vnode.attrs.conversations);
+            }
+          }, [
+            m("input.searchInput", {
+              "autocomplete": "off",
+              "id": "searchInput",
+              "placeholder": " Search"
+            }),
+          ]),
+          m("div#chatsPane",
+            paneContent.map((convo) => {
+              const preview = convo.messageQueue[convo.messageQueue.length - 1];
+              let unread = 0;
+              convo.messageQueue.forEach((msg) => {
+                if (msg.read === false) unread++;
+              })
+              return m('a', {
+                href: `/${convo.convoName}`,
+                oncreate: m.route.link
+              }, [
+                m('div.convoWrapper', [
+                  m('div.conversation', [
+                    m('img', {
+                      src: convo.img
+                    }),
+                    m('h3', convo.convoName),
+                    m('span.previewWrap', [
+                      m('p', preview.content)
+                    ]),
+                    m('span.unread', unread)
+                  ])
+                ])
+              ])
+            })
+          )
+        ])
+      }
+    }
+  }
+
   const Chatbox = {
     view: (vnode) => {
       const convo = currentConvo(vnode.attrs.conversations);
@@ -166,60 +216,6 @@
     }
   }
 
-  function ChatPane() {
-    let searchResults = [];
-    return {
-      view: (vnode) => {
-        let paneContent = [];
-        if (searchResults.length) {
-          paneContent = searchResults;
-        } else {
-          paneContent = vnode.attrs.conversations
-        }
-
-        return m("section.sidePane", [
-          m("form.searchBar", {
-            oninput() {
-              searchResults = searchInput(document.getElementById("searchInput").value, vnode.attrs.conversations);
-            }
-          }, [
-            m("input.searchInput", {
-              "autocomplete": "off",
-              "id": "searchInput",
-              "placeholder": " Search"
-            }),
-          ]),
-          m("div#chatsPane",
-            paneContent.map((convo) => {
-              const preview = convo.messageQueue[convo.messageQueue.length - 1];
-              let unread = 0;
-              convo.messageQueue.forEach((msg) => {
-                if (msg.read === false) unread++;
-              })
-              return m('a', {
-                href: `/${convo.convoName}`,
-                oncreate: m.route.link
-              }, [
-                m('div.convoWrapper', [
-                  m('div.conversation', [
-                    m('img', {
-                      src: convo.img
-                    }),
-                    m('h3', convo.convoName),
-                    m('span.previewWrap', [
-                      m('p', preview.content)
-                    ]),
-                    m('span.unread', unread)
-                  ])
-                ])
-              ])
-            })
-          )
-        ])
-      }
-    }
-  }
-
   function getTime() {
     const date = new Date();
     return date.getHours() + ":" + date.getMinutes();
@@ -272,5 +268,6 @@
     }
     return searchResults;
   }
+
 
 })();
