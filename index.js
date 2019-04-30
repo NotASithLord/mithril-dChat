@@ -23,14 +23,15 @@
     const conversations = [];
     let showHamburger = false;
 
-    //This takes the subscription data from window.connect in backend.js, and pushes the formatted incomingMessages into the conversations array
+    //This invokes window.connect in backend.js, pushing this function as the input which consumes an incoming message and forwards into the conversations array
     connect(messageData => {
-      const convo = conversations.find(convo => convo.convoName === messageData.sender);
+      const convoName = messageData.group ? messageData.group : messageData.sender;
+      const convo = conversations.find(convo => convo.convoName === convoName );
       if (convo != null) {
         convo.messageQueue.push(messageData);
       } else {
         conversations.push({
-          convoName: messageData.sender,
+          convoName: messageData.group ? messageData.group : messageData.sender,
           img: messageData.img,
           messageQueue: [messageData]
         });
