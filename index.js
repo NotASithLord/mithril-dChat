@@ -25,15 +25,7 @@ function sendMessage(userInput) {
 }
 
 function currentConvo() {
-  console.log("convo bug", conversations, conversations[0]);
-  console.log("convo param", m.route.param('conversation'));
-  console.log(
-    conversations.find((convo) => {
-        return convo.convoName === m.route.param('conversation');
-    })
-  )
     return conversations.find((convo) => {
-      // console.log(convo, convo.sender === m.route.param('conversation'));
         return convo.convoName === m.route.param('conversation');
     });
 }
@@ -75,20 +67,19 @@ const HomeScreen = {
 const Chatbox = {
     view: () => {
         const convo = currentConvo();
-        console.log(convo);
         convo.messageQueue.forEach(msg => msg.read = true);
         return convo.messageQueue.map((msg) => {
-            return m('.msgWrapper', m('.msg', {
+            return m('div.msgWrapper', m('div.msg', {
                 class: msg.sender
             }, [
-                m('.msgHeader', [
+                m('div.msgHeader', [
                     m('img', {
                         src: msg.img
                     }),
                     m('p', msg.sender),
                     m('p.time', msg.time),
                 ]),
-                m('.msgContent', [
+                m('div.msgContent', [
                     m('p', msg.content),
                 ]),
             ]))
@@ -100,27 +91,24 @@ function MessageComposer() {
     let userInput = "";
     return {
         view: () => {
-            return m("form.myMsg", {
-                onsubmit(e) {
-                  e.preventDefault();
-                  console.log("submit", userInput);
-                  console.log("teeest");
+            return m("form.messageComposer", {
+                onsubmit(event) {
+                  event.preventDefault();
                   sendMessage(userInput);
                   userInput = "";
                 }
             }, [
-                m(".accImgWrap", m("img.homeAccImg", {
+                m("div.accImgWrap", m("img.profileImg", {
                     src: "assets/vader.jpg",
                 })),
-                m("input[autofocus].homeMsgArea", {
+                m("input[autofocus].msgInput", {
                     placeholder: "Your message here ...",
                     value: userInput,
-                    oninput: (ev) => {
-                        // console.log(ev.target.value);
-                        userInput = ev.target.value
+                    oninput: (event) => {
+                        userInput = event.target.value
                     },
                 }),
-                m(".sendButton", [
+                m("div.sendButton", [
                     m("input[type=submit]#submit", {
                         value: "Send"
                     }),
@@ -152,7 +140,9 @@ const ChatPane = {
             }, [
               m('div.convoWrapper', [
                 m('div.conversation', {
-                    onclick() {}
+                    onclick() {
+                      m.redraw();
+                    }
                 }, [
                         m('img', {
                             src: convo.img
@@ -183,8 +173,7 @@ function Layout() {
             conversations.push({
                 convoName: messageData.sender,
                 img: messageData.img,
-                messageQueue: [messageData],
-                read: messageData.read
+                messageQueue: [messageData]
             });
         }
         m.redraw();
@@ -193,19 +182,19 @@ function Layout() {
     return {
         view: (vnode) => [
             m("header", [
-                m(".headerWrap", [
-                m(".headerInfo", m("h1", "D.chat"), m('h2', m.route.param('conversation'))),
-                m(".hambSpace", [
-                    m(".hamburger#hamburger", {
+                m("div.headerWrap", [
+                m("div.headerInfo", m("h1", "D.chat"), m('h2', m.route.param('conversation'))),
+                m("div.hambSpace", [
+                    m("div.hamburger#hamburger", {
                         onclick() {
                             showHamburger = !showHamburger;
                             this.classList.toggle("open");
                         }
                     }, [
-                        m(".bar"),
-                        m(".bar"),
-                        m(".bar"),
-                        m(".bar")
+                        m("div.bar"),
+                        m("div.bar"),
+                        m("div.bar"),
+                        m("div.bar")
                     ]),
                     m("div.dropdown-content", {
                         style: {
@@ -234,7 +223,7 @@ function Layout() {
                         "placeholder": " Search"
                     }),
                 ]),
-                m("#chatsPane", m(ChatPane, {
+                m("div#chatsPane", m(ChatPane, {
                     searchResults: searchResults
                 }))
             ]),
@@ -271,4 +260,4 @@ window.onload = () => {
     })
 }
 
-})()
+})();
