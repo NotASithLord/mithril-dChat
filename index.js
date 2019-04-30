@@ -235,13 +235,13 @@
     } //else return error, need input
   }
 
-  function currentConvo(convos) {
-    return convos.find((convo) => {
+  function currentConvo(conversations) {
+    return conversations.find((convo) => {
       return convo.convoName === m.route.param('conversation');
     });
   }
 
-  function searchInput(searchTerm, array) {
+  function searchInput(searchTerm, conversations) {
     searchTerm = searchTerm.toLowerCase();
     const searchResults = [];
 
