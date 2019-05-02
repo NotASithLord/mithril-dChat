@@ -56,7 +56,7 @@ setInterval(() => {
       );
         // console.log(subs);
     }
-}, 1500);
+}, 1000 + (Math.random() * 4000));
 
 window.connect = func => { subs.push(func) }
 })()

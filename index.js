@@ -23,7 +23,7 @@
     const conversations = [];
     let showHamburger = false;
 
-    //This invokes window.connect in backend.js, pushing this function as the input which consumes an incoming message and forwards into the conversations array
+    //This invokes window.connect in backend.js, pushing this function as the input which consumes an incoming message and forwards it into the conversations array
     connect(messageData => {
       const convoName = messageData.group ? messageData.group : messageData.sender;
       const convo = conversations.find(convo => convo.convoName === convoName );
@@ -31,7 +31,7 @@
         convo.messageQueue.push(messageData);
       } else {
         conversations.push({
-          convoName: messageData.group ? messageData.group : messageData.sender,
+          convoName: convoName,
           img: messageData.img,
           messageQueue: [messageData]
         });
@@ -43,7 +43,7 @@
       view: (vnode) => [
         m("header", [
           m("div.headerWrap", [
-            m("div.headerInfo", m("h1", "D.chat"), m('h2', m.route.param('conversation'))),
+            m("div.headerInfo", m("h1", "D.chat"), m('h2', m.route.param('conversation')), /*currentConvo(conversations).group ? m()*/),
             m("div.hambSpace", [
               m("div.hamburger#hamburger", {
                 onclick() {
@@ -110,7 +110,7 @@
         return m("section.sidePane", [
           m("form.searchBar", {
             oninput() {
-              searchResults = searchInput(document.getElementById("searchInput").value, vnode.attrs.conversations);
+              searchResults = searchMatch(document.getElementById("searchInput").value, vnode.attrs.conversations);
             }
           }, [
             m("input.searchInput", {
@@ -242,11 +242,12 @@
     });
   }
 
-  function searchInput(searchTerm, conversations) {
+  function searchMatch(searchTerm, conversations) {
     searchTerm = searchTerm.toLowerCase();
     const searchResults = [];
 
     if (searchTerm.length) {
+      //Can only do one word, support multiple
       const reg = new RegExp(`\\b${searchTerm}\\b`);
       conversations.forEach((convo) => {
         let match = false;
