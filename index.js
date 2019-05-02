@@ -225,12 +225,12 @@
     console.log("sending message to", convo);
     if (userInput && convo) {
       return new Promise((resolve, reject) => {
-        setTimeout(() => {
+        // setTimeout(() => {
           resolve({
             userInput,
             convo
           })
-        }, 100);
+        // }, 300);
       });
     } //else return error, need input
   }
